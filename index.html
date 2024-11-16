@@ -4,28 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="app">
-        <img v-bind:src="img" v-bind:alt="name">
+        <img 
+            v-on:mouseover="toggleShowPrices" 
+            v-on:mouseout="toggleShowPrices" 
+            v-bind:src="img" 
+            v-bind:alt="name"
+        >
         <h1>
             {{ name }}
-            <span v-if="changePercent > 0">:b</span>
-            <span v-else-if="changePercent < 0">:p</span>
-            <span v-else>xl</span>
+            <span v-if="changePercent > 0">👍</span>
+            <span v-else-if="changePercent < 0">👎</span>
+            <span v-else>🤞</span>
 
             <!-- <span v-show="changePercent > 0">:b</span>
             <span v-show="changePercent < 0">:p</span>
             <span v-show="changePercent === 0">xl</span> -->
+            <span v-on:click="toggleShowPrices">{{ showPrices ? '🙈' : '🐵' }}</span>
+            
         </h1>
-        <ul>
+        <!-- <ul>
             <li v-for="(p, i) in prices" v-bind:key="p">
                 {{ i }}- {{ p }}
             </li>
-        </ul>
+        </ul> -->
 
-        <ul>
+
+        <ul v-show="showPrices">
             <li v-for="(p, i) in pricesWithDays" v-bind:key="p.day">
                 {{ i }} - {{ p.day }} {{ p.value }}
             </li>
